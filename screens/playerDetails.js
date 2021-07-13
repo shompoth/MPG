@@ -1,7 +1,14 @@
 // Librairie
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    ActivityIndicator,
+    Dimensions,
+    ScrollView,
+} from "react-native";
 import Logo from "../Components/UI/Logo/Logo";
 
 function playerDetails(props) {
@@ -125,23 +132,11 @@ function playerDetails(props) {
                             style={{
                                 flexDirection: "row",
                                 justifyContent: "space-around",
-                                borderBottomWidth: 0.5,
+                                borderBottomWidth: 0.3,
                                 borderBottomColor: "e9ebee",
                                 width: "100%",
                             }}
                         >
-                            {/* <View style={styles.presentationDiv}>
-                                {detailPlayer.firstname && (
-                                    <Text style={styles.playerName}>
-                                        {detailPlayer.firstname}
-                                    </Text>
-                                )}
-
-                                <Text style={styles.playerName}>
-                                    {detailPlayer.lastname}
-                                </Text>
-                            </View> */}
-
                             <View style={{ ...styles.presentationDiv, flex: 1 }}>
                                 <Text style={styles.textCenter18}>
                                     {playerPosition(detailPlayer.ultraPosition)}
@@ -161,7 +156,7 @@ function playerDetails(props) {
                                 style={{
                                     flexDirection: "row",
                                     justifyContent: "space-around",
-                                    borderBottomWidth: 0.5,
+                                    borderBottomWidth: 0.3,
                                     borderBottomColor: "e9ebee",
                                     width: "100%",
                                 }}
@@ -237,7 +232,7 @@ function playerDetails(props) {
                                 style={{
                                     flexDirection: "row",
                                     justifyContent: "space-around",
-                                    borderBottomWidth: 0.5,
+                                    borderBottomWidth: 0.3,
                                     borderBottomColor: "e9ebee",
                                     width: "100%",
                                 }}
@@ -286,6 +281,306 @@ function playerDetails(props) {
                                 </View>
                             </View>
                         </View>
+                        <ScrollView style={{ width: "90%" }}>
+                            {detailPlayer.ultraPosition === 10 ? (
+                                <View
+                                    style={{
+                                        justifyContent: "center",
+                                        paddingVertical: 10,
+                                        marginVertical: 10,
+                                    }}
+                                >
+                                    <Text style={styles.detailProperty}>EFFICACE ?</Text>
+                                    <View style={styles.rowDiv}>
+                                        <Text>Buts encaissés par match :</Text>
+                                        <Text style={styles.blueColor}>
+                                            {detailPlayer.stats.goalsConcededByMatch}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.rowDiv}>
+                                        <Text>Nombre de cleansheet :</Text>
+                                        <Text style={styles.blueColor}>
+                                            {detailPlayer.stats.sumCleanSheet}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.rowDiv}>
+                                        <Text>Arrêts réalisés : </Text>
+                                        <Text style={styles.blueColor}>
+                                            {detailPlayer.stats.sumSaves}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.rowDiv}>
+                                        <Text>Parades : </Text>
+                                        <Text style={styles.blueColor}>
+                                            {detailPlayer.stats.sumDeflect}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.rowDiv}>
+                                        <Text>Pénaltys sauvés : </Text>
+                                        <Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.sumPenaltySave}
+                                            </Text>{" "}
+                                            (
+                                            {detailPlayer.stats.sumPenaltySave &&
+                                                (detailPlayer.stats.sumPenaltySave /
+                                                    detailPlayer.stats.sumPenaltyFaced) *
+                                                    100}
+                                            %)
+                                        </Text>
+                                    </View>
+                                </View>
+                            ) : (
+                                <>
+                                    <View
+                                        style={{
+                                            justifyContent: "center",
+                                            paddingVertical: 10,
+                                            marginVertical: 10,
+                                        }}
+                                    >
+                                        <Text style={styles.detailProperty}>
+                                            EFFICACE ?
+                                        </Text>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Duels remportés par match :</Text>
+                                            <Text>
+                                                <Text>
+                                                    <Text style={styles.blueColor}>
+                                                        {
+                                                            detailPlayer.stats
+                                                                .wonContestByMatch
+                                                        }
+                                                    </Text>
+                                                    (
+                                                    {
+                                                        detailPlayer.stats
+                                                            .percentageWonContest
+                                                    }
+                                                    %)
+                                                </Text>
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Duels remportés par match : </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {detailPlayer.stats.wonDuelByMatch}
+                                                </Text>
+                                                ({detailPlayer.stats.percentageWonDuel}%)
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Pertes de balles par match : </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {detailPlayer.stats.lostBallByMatch}
+                                                </Text>
+                                                ({detailPlayer.stats.percentageLostBall}%)
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Fautes commises par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.foulsByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Fautes subies par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.foulsEnduredByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Tirs cadrés par match : </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {
+                                                        detailPlayer.stats
+                                                            .shotOnTargetByMatch
+                                                    }
+                                                </Text>
+                                                (
+                                                {
+                                                    detailPlayer.stats
+                                                        .percentageShotOnTarget
+                                                }
+                                                %)
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View
+                                        style={{
+                                            justifyContent: "center",
+                                            paddingVertical: 10,
+                                            marginVertical: 10,
+                                        }}
+                                    >
+                                        <Text style={styles.detailProperty}>
+                                            IL PLANTE ?
+                                        </Text>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Buts (pén) :</Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.sumGoals} (
+                                                {detailPlayer.stats.sumPenalties})
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Fréquence de buts (min.) : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.minutesByGoal}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Buts par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.goalByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Tirs par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.shotByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Grosses occasions manquées : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.sumBigChanceMissed}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View
+                                        style={{
+                                            justifyContent: "center",
+                                            paddingVertical: 10,
+                                            marginVertical: 10,
+                                        }}
+                                    >
+                                        <Text style={styles.detailProperty}>
+                                            UN AS DE LA PASSE ?
+                                        </Text>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Passes décisives : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.sumGoalAssist}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Grosses occasions créées : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.sumBigChanceCreated}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Passes réussies par match : </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {
+                                                        detailPlayer.stats
+                                                            .succeedPassByMatch
+                                                    }
+                                                </Text>
+                                                (
+                                                {detailPlayer.stats.percentageSucceedPass}
+                                                %)
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>
+                                                Passes réussies dans son camp par match :{" "}
+                                            </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {
+                                                        detailPlayer.stats
+                                                            .succeedPassBackZoneByMatch
+                                                    }
+                                                </Text>
+                                                (
+                                                {
+                                                    detailPlayer.stats
+                                                        .percentageAccuratePassBackZone
+                                                }
+                                                %)
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>
+                                                Passes longues réussies par match :{" "}
+                                            </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {
+                                                        detailPlayer.stats
+                                                            .succeedLongPassByMatch
+                                                    }
+                                                </Text>
+                                                (
+                                                {
+                                                    detailPlayer.stats
+                                                        .percentageAccurateLongPass
+                                                }
+                                                %)
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Centres réussis par match : </Text>
+                                            <Text>
+                                                <Text style={styles.blueColor}>
+                                                    {
+                                                        detailPlayer.stats
+                                                            .succeedCrossByMatch
+                                                    }
+                                                </Text>
+                                                (
+                                                {
+                                                    detailPlayer.stats
+                                                        .percentageCrossSuccess
+                                                }
+                                                %)
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View
+                                        style={{
+                                            justifyContent: "center",
+                                            paddingVertical: 10,
+                                            marginVertical: 10,
+                                        }}
+                                    >
+                                        <Text style={styles.detailProperty}>
+                                            SOLIDE ?
+                                        </Text>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Interceptions par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.interceptByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Tacles par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.tackleByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Buts encaissés par match : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.goalsConcededByMatch}
+                                            </Text>
+                                        </View>
+                                        <View style={styles.rowDiv}>
+                                            <Text>Erreurs qui amènent un but : </Text>
+                                            <Text style={styles.blueColor}>
+                                                {detailPlayer.stats.mistakeByMatch}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </>
+                            )}
+                        </ScrollView>
                     </>
                 ) : (
                     <ActivityIndicator size="large" color="#000" />
@@ -304,6 +599,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         // paddingVertical: 50,
         // marginHorizontal: 15,
+    },
+    rowDiv: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        maxWidth: "100%",
+        paddingVertical: 2,
     },
     presentationDiv: {
         flex: 1,
@@ -324,6 +625,9 @@ const styles = StyleSheet.create({
         color: "#4054cc",
         marginTop: 5,
     },
+    blueColor: {
+        color: "#4054cc",
+    },
     card18: {
         fontSize: 18,
         textAlign: "center",
@@ -343,6 +647,13 @@ const styles = StyleSheet.create({
 
     mt20: {
         marginTop: 20,
+    },
+    mr5: {
+        marginRight: 5,
+    },
+    detailProperty: {
+        fontSize: 18,
+        marginBottom: 5,
     },
 });
 
