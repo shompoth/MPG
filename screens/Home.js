@@ -231,6 +231,7 @@ function Home(props) {
                                                 /[^0-9]/g,
                                                 "",
                                             ),
+                                            dimensions,
                                         });
                                     }}
                                     activeOpacity={1}
@@ -273,7 +274,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         backgroundColor: "#fff",
         // paddingVertical: 50,
-        marginHorizontal: 15,
+        // marginHorizontal: 15,
     },
     listWrapper: {
         flex: 1,
