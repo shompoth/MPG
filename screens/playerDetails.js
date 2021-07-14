@@ -9,11 +9,12 @@ import {
     Dimensions,
     ScrollView,
 } from "react-native";
-import Logo from "../Components/UI/Logo/Logo";
+import Logo from "../components/UI/Logo/Logo";
 
 function playerDetails(props) {
     // State
     const [detailPlayer, setDetailPlayer] = useState("");
+    // const [dimensions, setDimensions] = useState({ window, screen });
 
     // Cycle de vie
     useEffect(() => {
@@ -37,7 +38,7 @@ function playerDetails(props) {
     //     };
     // });
 
-    // Variables
+    // Variables;
     // const window = Dimensions.get("window");
     // const screen = Dimensions.get("screen");
 
@@ -72,16 +73,16 @@ function playerDetails(props) {
     };
 
     function getAge(birth) {
-        birth = birth.replace(/-/g, "/"); //Replace the "-" in the format with "/"
-        birth = new Date(birth); //Change to Date type after replacement
-        const now = new Date(); //Get the current date
-        const nowYear = now.getFullYear(); //The year of the current date
+        birth = birth.replace(/-/g, "/");
+        birth = new Date(birth);
+        const now = new Date();
+        const nowYear = now.getFullYear();
         const nowMonth = now.getMonth();
         const nowDay = now.getDay();
 
         const birthYear = birth.getFullYear();
         const birthMonth = birth.getMonth();
-        const birthDay = birth.getDay(); //Number of days of birth date
+        const birthDay = birth.getDay();
         let age;
 
         if (birth > now) {
@@ -102,8 +103,14 @@ function playerDetails(props) {
     // };
 
     return (
-        <>
-            {/* <Logo dimensions={props.dimensions} /> */}
+        <View
+            style={{
+                alignItems: "center",
+                flex: 1,
+                justifyContent: "center",
+            }}
+        >
+            {/* <Logo dimensions={dimensions} /> */}
             <View
                 style={{ ...styles.container, backgroundColor: "rgba(91, 196, 69, 0.7)" }}
             >
@@ -128,15 +135,7 @@ function playerDetails(props) {
                                 </Text>
                             </View>
                         </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                                borderBottomWidth: 0.3,
-                                borderBottomColor: "e9ebee",
-                                width: "100%",
-                            }}
-                        >
+                        <View style={styles.divWrapperBigStats}>
                             <View style={{ ...styles.presentationDiv, flex: 1 }}>
                                 <Text style={styles.textCenter18}>
                                     {playerPosition(detailPlayer.ultraPosition)}
@@ -147,20 +146,14 @@ function playerDetails(props) {
                             </View>
                             <View style={{ ...styles.presentationDiv, flex: 1 }}>
                                 <Text style={styles.textCenter18}>
-                                    {getAge(detailPlayer.birthDate)} ans
+                                    {detailPlayer.birthDate &&
+                                        getAge(detailPlayer.birthDate)}
+                                    {detailPlayer.birthDate && <Text> ans</Text>}
                                 </Text>
                             </View>
                         </View>
                         <View style={styles.mt20}>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-around",
-                                    borderBottomWidth: 0.3,
-                                    borderBottomColor: "e9ebee",
-                                    width: "100%",
-                                }}
-                            >
+                            <View style={styles.divWrapperBigStats}>
                                 <View style={{ ...styles.presentationDiv, flex: 1 }}>
                                     <Text style={styles.textCenter16}>Note moyenne</Text>
                                     <Text style={styles.blueTextCenter20}>
@@ -228,15 +221,7 @@ function playerDetails(props) {
                                     </>
                                 )}
                             </View>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-around",
-                                    borderBottomWidth: 0.3,
-                                    borderBottomColor: "e9ebee",
-                                    width: "100%",
-                                }}
-                            >
+                            <View style={styles.divWrapperBigStats}>
                                 <View style={styles.presentationDiv}>
                                     <Text style={styles.textCenter16}>Côte</Text>
                                     <Text style={styles.blueTextCenter20}>
@@ -283,13 +268,7 @@ function playerDetails(props) {
                         </View>
                         <ScrollView style={{ width: "90%" }}>
                             {detailPlayer.ultraPosition === 10 ? (
-                                <View
-                                    style={{
-                                        justifyContent: "center",
-                                        paddingVertical: 10,
-                                        marginVertical: 10,
-                                    }}
-                                >
+                                <View style={styles.divWrapperLittleStats}>
                                     <Text style={styles.detailProperty}>EFFICACE ?</Text>
                                     <View style={styles.rowDiv}>
                                         <Text>Buts encaissés par match :</Text>
@@ -332,13 +311,7 @@ function playerDetails(props) {
                                 </View>
                             ) : (
                                 <>
-                                    <View
-                                        style={{
-                                            justifyContent: "center",
-                                            paddingVertical: 10,
-                                            marginVertical: 10,
-                                        }}
-                                    >
+                                    <View style={styles.divWrapperLittleStats}>
                                         <Text style={styles.detailProperty}>
                                             EFFICACE ?
                                         </Text>
@@ -409,13 +382,7 @@ function playerDetails(props) {
                                             </Text>
                                         </View>
                                     </View>
-                                    <View
-                                        style={{
-                                            justifyContent: "center",
-                                            paddingVertical: 10,
-                                            marginVertical: 10,
-                                        }}
-                                    >
+                                    <View style={styles.divWrapperLittleStats}>
                                         <Text style={styles.detailProperty}>
                                             IL PLANTE ?
                                         </Text>
@@ -451,13 +418,7 @@ function playerDetails(props) {
                                             </Text>
                                         </View>
                                     </View>
-                                    <View
-                                        style={{
-                                            justifyContent: "center",
-                                            paddingVertical: 10,
-                                            marginVertical: 10,
-                                        }}
-                                    >
+                                    <View style={styles.divWrapperLittleStats}>
                                         <Text style={styles.detailProperty}>
                                             UN AS DE LA PASSE ?
                                         </Text>
@@ -543,13 +504,7 @@ function playerDetails(props) {
                                             </Text>
                                         </View>
                                     </View>
-                                    <View
-                                        style={{
-                                            justifyContent: "center",
-                                            paddingVertical: 10,
-                                            marginVertical: 10,
-                                        }}
-                                    >
+                                    <View style={styles.divWrapperLittleStats}>
                                         <Text style={styles.detailProperty}>
                                             SOLIDE ?
                                         </Text>
@@ -586,7 +541,7 @@ function playerDetails(props) {
                     <ActivityIndicator size="large" color="#000" />
                 )}
             </View>
-        </>
+        </View>
     );
 }
 const styles = StyleSheet.create({
@@ -597,8 +552,20 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 20,
         backgroundColor: "#fff",
+        width: "100%",
         // paddingVertical: 50,
         // marginHorizontal: 15,
+    },
+    divWrapperBigStats: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        borderBottomWidth: 0.3,
+        borderBottomColor: "#e9ebee",
+        width: "100%",
+    },
+    divWrapperLittleStats: {
+        justifyContent: "center",
+        paddingVertical: 10,
     },
     rowDiv: {
         flexDirection: "row",
@@ -610,7 +577,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        paddingVertical: 10,
+        paddingVertical: 7,
         paddingHorizontal: 5,
     },
     playerName: {
@@ -646,7 +613,7 @@ const styles = StyleSheet.create({
     },
 
     mt20: {
-        marginTop: 20,
+        marginVertical: 10,
     },
     mr5: {
         marginRight: 5,

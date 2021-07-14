@@ -17,8 +17,8 @@ import {
 } from "react-native";
 
 // Composants
-import Test from "../Components/Test";
-import Logo from "../Components/UI/Logo/Logo";
+import Test from "../components/Test";
+import Logo from "../components/UI/Logo/Logo";
 
 // Variables
 const window = Dimensions.get("window");
@@ -32,11 +32,7 @@ function Home(props) {
 
     const [players, setPlayers] = useState("");
 
-    // const [sortPlayer, setSortPlayer] = useState("");
-
     const [sortPlayers, setSortPlayers] = useState(null);
-
-    // const [actualPlayer, setActualPlayer] = useState(null);
 
     // Cycles de vie
     useEffect(() => {
@@ -165,95 +161,102 @@ function Home(props) {
     // };
 
     return (
-        <View style={styles.container}>
-            <StatusBar style="auto" />
-            <Logo dimensions={dimensions} />
-            <Test />
+        <View
+            style={{
+                alignItems: "center",
+                flex: 1,
+                justifyContent: "center",
+                backgroundColor: "#fff",
+            }}
+        >
+            <View style={styles.container}>
+                <StatusBar style="auto" />
+                <Logo dimensions={dimensions} />
+                <Test />
 
-            {players ? (
-                <>
-                    <View
-                        style={{
-                            marginTop: 10,
-                            paddingHorizontal: 10,
-                            borderRadius: "10%",
-                            flexDirection: "row",
-                            backgroundColor: "#e9ebee",
-                        }}
-                    >
-                        {tableList.map(item => (
-                            <TouchableOpacity
-                                onPress={() => settingSort(item)}
-                                activeOpacity={0.6}
-                                style={{
-                                    ...styles.listWrapper,
-                                    paddingHorizontal: 0,
-                                }}
-                                key={item}
-                            >
-                                <View
+                {players ? (
+                    <>
+                        <View
+                            style={{
+                                marginTop: 10,
+                                paddingHorizontal: 10,
+                                borderRadius: "10%",
+                                flexDirection: "row",
+                                backgroundColor: "#e9ebee",
+                            }}
+                        >
+                            {tableList.map(item => (
+                                <TouchableOpacity
+                                    onPress={() => settingSort(item)}
+                                    activeOpacity={0.6}
                                     style={{
-                                        ...styles.row,
-                                        height: 50,
-                                        flex: 1,
+                                        ...styles.listWrapper,
+                                        paddingHorizontal: 0,
                                     }}
+                                    key={item}
                                 >
-                                    <Text
+                                    <View
                                         style={{
                                             ...styles.row,
-                                            color: "#99a0b2",
-                                            fontWeight: "bold",
+                                            height: 50,
+                                            flex: 1,
                                         }}
                                     >
-                                        {item}
+                                        <Text
+                                            style={{
+                                                ...styles.row,
+                                                color: "#99a0b2",
+                                                fontWeight: "bold",
+                                            }}
+                                        >
+                                            {item}
 
-                                        {/* {sortPlayers && displayArrow(item)} */}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                    <FlatList
-                        data={players}
-                        renderItem={player => (
-                            <TouchableHighlight
-                                onPress={() => {
-                                    // setActualPlayer(true);
-                                    // setModalVisible(true);
-                                    // Alert.alert(
-                                    //     "Désolé",
-                                    //     "Cette fonctionnalité n'est pas encore disponible",
-                                    //     "",
-                                    // );
-                                    props.navigation.navigate("Detail du joueur", {
-                                        IDPlayer: player.item.id.replace(/[^0-9]/g, ""),
-                                        dimensions,
-                                    });
-                                }}
-                                activeOpacity={1}
-                                underlayColor="rgba(91, 196, 69, 0.7)"
-                            >
-                                <View style={styles.listWrapper}>
-                                    <Text style={styles.row}>{player.item.lastname}</Text>
-                                    <Text style={styles.row}>
-                                        {playerPosition(player.item.ultraPosition)}
-                                    </Text>
-                                    <Text style={styles.row}>{player.item.club}</Text>
-                                    <Text style={styles.row}>
-                                        {player.item.quotation}
-                                    </Text>
-                                </View>
-                            </TouchableHighlight>
-                        )}
-                        keyExtractor={player => player.id}
-                        style={{
-                            width: "100%",
-                        }}
-                    />
-                </>
-            ) : (
-                <ActivityIndicator size="large" color="#000" />
-            )}
+                                            {/* {sortPlayers && displayArrow(item)} */}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                        <FlatList
+                            data={players}
+                            renderItem={player => (
+                                <TouchableHighlight
+                                    onPress={() => {
+                                        props.navigation.navigate("Detail du joueur", {
+                                            IDPlayer: player.item.id.replace(
+                                                /[^0-9]/g,
+                                                "",
+                                            ),
+                                            dimensions,
+                                        });
+                                    }}
+                                    activeOpacity={1}
+                                    underlayColor="rgba(91, 196, 69, 0.7)"
+                                >
+                                    <View style={styles.listWrapper}>
+                                        <Text style={styles.row}>
+                                            {player.item.lastname}
+                                        </Text>
+                                        <Text style={styles.row}>
+                                            {playerPosition(player.item.ultraPosition)}
+                                        </Text>
+                                        <Text style={styles.row}>{player.item.club}</Text>
+                                        <Text style={styles.row}>
+                                            {player.item.quotation}
+                                        </Text>
+                                    </View>
+                                </TouchableHighlight>
+                            )}
+                            keyExtractor={player => player.id}
+                            style={{
+                                width: "100%",
+                            }}
+                        />
+                    </>
+                ) : (
+                    <ActivityIndicator size="large" color="#000" />
+                )}
+            </View>
         </View>
     );
 }
@@ -261,13 +264,12 @@ function Home(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: window.width > 450 ? "85%" : "95%",
         alignItems: "center",
         justifyContent: "center",
         paddingTop: 10,
         paddingBottom: 20,
         backgroundColor: "#fff",
-        // paddingVertical: 50,
-        // marginHorizontal: 15,
     },
     listWrapper: {
         flex: 1,
@@ -279,8 +281,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flex: 1,
-        // justifyContent: "center",
-        // alignItems: "center",
+        justifyContent: "center",
         paddingVertical: 10,
         fontSize: 12,
     },

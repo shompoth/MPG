@@ -3,7 +3,7 @@
         "name": "monPetitGzzon",
         "slug": "monPetitGzzon",
         "version": "1.0.0",
-        "orientation": "portrait",
+        "orientation": "all",
         "icon": "./assets/mpgHomeLogo.png",
         "splash": {
             "image": "./assets/mpgHomeLogo.png",

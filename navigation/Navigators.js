@@ -12,7 +12,10 @@ const MainStackNavigatorComponent = createStackNavigator();
 export const MainStackNavigator = () => {
     return (
         <MainStackNavigatorComponent.Navigator>
-            <MainStackNavigatorComponent.Screen name="Home" component={HomeScreen} />
+            <MainStackNavigatorComponent.Screen
+                name="Joueurs Ligue 1 - 2018"
+                component={HomeScreen}
+            />
             <MainStackNavigatorComponent.Screen
                 name="Detail du joueur"
                 component={PlayerDetailsScreen}
