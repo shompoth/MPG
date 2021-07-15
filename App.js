@@ -1,6 +1,5 @@
 // Librairies
-import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import React from "react";
 
 // Composant
 import AppNavigator from "./navigation/AppNavigator";

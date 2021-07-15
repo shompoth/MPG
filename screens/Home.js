@@ -6,13 +6,10 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     FlatList,
     Dimensions,
-    Alert,
     TouchableHighlight,
     TouchableOpacity,
-    TouchableWithoutFeedback,
     ActivityIndicator,
 } from "react-native";
 
@@ -106,59 +103,23 @@ function Home(props) {
     };
 
     const sortFunction = sortPlayers => {
+        const newPlayers = [...players];
+
         if (sortPlayers === "alphaAscending") {
-            players.sort((a, b) =>
+            newPlayers.sort((a, b) =>
                 b.lastname.toUpperCase() > a.lastname.toUpperCase() ? 1 : -1,
             );
         } else if (sortPlayers === "alphaDescending") {
-            players.sort((a, b) =>
+            newPlayers.sort((a, b) =>
                 a.lastname.toUpperCase() > b.lastname.toUpperCase() ? 1 : -1,
             );
         } else if (sortPlayers === "posteDescending") {
-            players.sort((a, b) => (a.ultraPosition > b.ultraPosition ? 1 : -1));
+            newPlayers.sort((a, b) => (a.ultraPosition > b.ultraPosition ? 1 : -1));
         } else if (sortPlayers === "posteAscending") {
-            players.sort((a, b) => (b.ultraPosition > a.ultraPosition ? 1 : -1));
+            newPlayers.sort((a, b) => (b.ultraPosition > a.ultraPosition ? 1 : -1));
         }
+        setPlayers(newPlayers);
     };
-
-    // const displayArrow = item => {
-    //     let arrow;
-    //     if (item === "Joueurs") {
-    //         if (sortPlayers === "alphaDescending") {
-    //             arrow = (
-    //                 <Image
-    //                     source={require("../assets/downArrow.png")}
-    //                     style={{ paddingTop: 10 }}
-    //                 />
-    //             );
-    //         } else if (sortPlayers === "posteDescending") {
-    //             arrow = (
-    //                 <Image
-    //                     source={require("./assets/downArrow.png")}
-    //                     style={{ paddingTop: 10 }}
-    //                 />
-    //             );
-    //         }
-    //     } else if (item === "Poste") {
-    //         if (sortPlayers === "alphaAscending") {
-    //             arrow = (
-    //                 <Image
-    //                     source={require("./assets/upArrow.png")}
-    //                     style={{ paddingTop: 10 }}
-    //                 />
-    //             );
-    //         } else if (sortPlayers === "posteAscending") {
-    //             arrow = (
-    //                 <Image
-    //                     source={require("./assets/upArrow.png")}
-    //                     style={{ paddingTop: 10 }}
-    //                 />
-    //             );
-    //         }
-    //     }
-
-    //     return arrow;
-    // };
 
     return (
         <View
@@ -210,8 +171,6 @@ function Home(props) {
                                             }}
                                         >
                                             {item}
-
-                                            {/* {sortPlayers && displayArrow(item)} */}
                                         </Text>
                                     </View>
                                 </TouchableOpacity>

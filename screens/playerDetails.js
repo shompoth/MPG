@@ -1,20 +1,11 @@
 // Librairie
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-    View,
-    Text,
-    StyleSheet,
-    ActivityIndicator,
-    Dimensions,
-    ScrollView,
-} from "react-native";
-import Logo from "../components/UI/Logo/Logo";
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from "react-native";
 
 function playerDetails(props) {
     // State
     const [detailPlayer, setDetailPlayer] = useState("");
-    // const [dimensions, setDimensions] = useState({ window, screen });
 
     // Cycle de vie
     useEffect(() => {
@@ -30,17 +21,6 @@ function playerDetails(props) {
                 console.log(error);
             });
     }, []);
-
-    // useEffect(() => {
-    //     Dimensions.addEventListener("change", onChange);
-    //     return () => {
-    //         Dimensions.removeEventListener("change", onChange);
-    //     };
-    // });
-
-    // Variables;
-    // const window = Dimensions.get("window");
-    // const screen = Dimensions.get("screen");
 
     // Fonctions
     const playerPosition = ultraPosition => {
@@ -93,14 +73,10 @@ function playerDetails(props) {
         ) {
             age = nowYear - birthYear;
         } else {
-            age = nowYear - birthYear - 1; //In short, the age cannot be +1 before the birthday
+            age = nowYear - birthYear - 1;
         }
         return age;
     }
-
-    // const onChange = ({ window, screen }) => {
-    //     setDimensions({ window, screen });
-    // };
 
     return (
         <View
@@ -110,7 +86,6 @@ function playerDetails(props) {
                 justifyContent: "center",
             }}
         >
-            {/* <Logo dimensions={dimensions} /> */}
             <View
                 style={{ ...styles.container, backgroundColor: "rgba(91, 196, 69, 0.7)" }}
             >
@@ -123,15 +98,9 @@ function playerDetails(props) {
                                 width: "100%",
                             }}
                         >
-                            <View style={styles.presentationDiv}>
-                                {detailPlayer.firstname && (
-                                    <Text style={styles.playerName}>
-                                        {detailPlayer.firstname}
-                                    </Text>
-                                )}
-
+                            <View style={{ ...styles.presentationDiv, marginBottom: 15 }}>
                                 <Text style={styles.playerName}>
-                                    {detailPlayer.lastname}
+                                    {detailPlayer.firstname} {detailPlayer.lastname}
                                 </Text>
                             </View>
                         </View>
@@ -140,6 +109,8 @@ function playerDetails(props) {
                                 <Text style={styles.textCenter18}>
                                     {playerPosition(detailPlayer.ultraPosition)}
                                 </Text>
+                            </View>
+                            <View style={{ ...styles.presentationDiv, flex: 1 }}>
                                 <Text style={styles.textCenter18}>
                                     {detailPlayer.club}{" "}
                                 </Text>
@@ -302,9 +273,10 @@ function playerDetails(props) {
                                             </Text>{" "}
                                             (
                                             {detailPlayer.stats.sumPenaltySave &&
-                                                (detailPlayer.stats.sumPenaltySave /
-                                                    detailPlayer.stats.sumPenaltyFaced) *
-                                                    100}
+                                                (
+                                                    detailPlayer.stats.sumPenaltySave /
+                                                    detailPlayer.stats.sumPenaltyFaced
+                                                ).toFixed(3) * 100}
                                             %)
                                         </Text>
                                     </View>
@@ -324,7 +296,7 @@ function playerDetails(props) {
                                                             detailPlayer.stats
                                                                 .wonContestByMatch
                                                         }
-                                                    </Text>
+                                                    </Text>{" "}
                                                     (
                                                     {
                                                         detailPlayer.stats
@@ -339,7 +311,7 @@ function playerDetails(props) {
                                             <Text>
                                                 <Text style={styles.blueColor}>
                                                     {detailPlayer.stats.wonDuelByMatch}
-                                                </Text>
+                                                </Text>{" "}
                                                 ({detailPlayer.stats.percentageWonDuel}%)
                                             </Text>
                                         </View>
@@ -348,7 +320,7 @@ function playerDetails(props) {
                                             <Text>
                                                 <Text style={styles.blueColor}>
                                                     {detailPlayer.stats.lostBallByMatch}
-                                                </Text>
+                                                </Text>{" "}
                                                 ({detailPlayer.stats.percentageLostBall}%)
                                             </Text>
                                         </View>
@@ -372,7 +344,7 @@ function playerDetails(props) {
                                                         detailPlayer.stats
                                                             .shotOnTargetByMatch
                                                     }
-                                                </Text>
+                                                </Text>{" "}
                                                 (
                                                 {
                                                     detailPlayer.stats
@@ -442,7 +414,7 @@ function playerDetails(props) {
                                                         detailPlayer.stats
                                                             .succeedPassByMatch
                                                     }
-                                                </Text>
+                                                </Text>{" "}
                                                 (
                                                 {detailPlayer.stats.percentageSucceedPass}
                                                 %)
@@ -458,7 +430,7 @@ function playerDetails(props) {
                                                         detailPlayer.stats
                                                             .succeedPassBackZoneByMatch
                                                     }
-                                                </Text>
+                                                </Text>{" "}
                                                 (
                                                 {
                                                     detailPlayer.stats
@@ -477,7 +449,7 @@ function playerDetails(props) {
                                                         detailPlayer.stats
                                                             .succeedLongPassByMatch
                                                     }
-                                                </Text>
+                                                </Text>{" "}
                                                 (
                                                 {
                                                     detailPlayer.stats
@@ -494,7 +466,7 @@ function playerDetails(props) {
                                                         detailPlayer.stats
                                                             .succeedCrossByMatch
                                                     }
-                                                </Text>
+                                                </Text>{" "}
                                                 (
                                                 {
                                                     detailPlayer.stats
@@ -553,12 +525,11 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         backgroundColor: "#fff",
         width: "100%",
-        // paddingVertical: 50,
-        // marginHorizontal: 15,
     },
     divWrapperBigStats: {
         flexDirection: "row",
         justifyContent: "space-around",
+        paddingHorizontal: 10,
         borderBottomWidth: 0.3,
         borderBottomColor: "#e9ebee",
         width: "100%",
@@ -578,12 +549,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         paddingVertical: 7,
+        paddingBottom: 15,
         paddingHorizontal: 5,
     },
     playerName: {
         fontSize: 22,
         fontWeight: "bold",
-        textDecorationLine: "underline",
     },
     blueTextCenter20: {
         fontSize: 20,
