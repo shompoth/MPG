@@ -14,7 +14,6 @@ import {
 } from "react-native";
 
 // Composants
-import Test from "../components/Test";
 import Logo from "../components/UI/Logo/Logo";
 
 // Variables
@@ -133,7 +132,6 @@ function Home(props) {
             <View style={styles.container}>
                 <StatusBar style="auto" />
                 <Logo dimensions={dimensions} />
-                <Test />
 
                 {players ? (
                     <>
